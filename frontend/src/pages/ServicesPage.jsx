@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code, Zap, Sparkles, Palette, ShoppingCart, Globe } from 'lucide-react';
+import { Code, Zap, Sparkles, Palette, ShoppingCart, Globe, Layers, TrendingUp, Target, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import MagneticButton from '../components/MagneticButton';
 
@@ -69,6 +69,50 @@ const ServicesPage = () => {
         'Competitor Research',
         'Growth Planning',
         'Performance Tracking',
+      ],
+    },
+    {
+      icon: <Layers className="w-12 h-12" />,
+      title: 'Strategy',
+      description: 'Data-driven digital strategies that align with your business goals and accelerate growth.',
+      features: [
+        'Brand Positioning',
+        'Go-to-Market Planning',
+        'Digital Roadmapping',
+        'KPI Framework',
+      ],
+    },
+    {
+      icon: <TrendingUp className="w-12 h-12" />,
+      title: 'SEO / AEO',
+      description: 'Dominate search results and answer engines with cutting-edge optimization techniques.',
+      features: [
+        'Technical SEO Audit',
+        'Content Strategy',
+        'Answer Engine Optimization',
+        'Keyword Research',
+      ],
+    },
+    {
+      icon: <Target className="w-12 h-12" />,
+      title: 'CRO',
+      description: 'Conversion rate optimization that turns your visitors into paying customers.',
+      features: [
+        'A/B Testing',
+        'Funnel Analysis',
+        'Landing Page Optimization',
+        'Heatmap Analysis',
+      ],
+    },
+    {
+      icon: <Bot className="w-12 h-12" />,
+      title: 'AI Integration',
+      description: 'Embed intelligent AI features into your product to automate and personalize experiences.',
+      features: [
+        'AI Chatbots',
+        'Recommendation Engines',
+        'Workflow Automation',
+        'LLM Integration',
       ],
     },
   ];
