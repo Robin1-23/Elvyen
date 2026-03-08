@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Zap, Code, Palette } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Code, Palette, TrendingUp, Target, Bot, Layers, BarChart3 } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
 import ScheduleMeeting from '../components/ScheduleMeeting';
 import gsap from 'gsap';
@@ -99,6 +99,26 @@ const HomePage = () => {
       icon: <Palette className="w-8 h-8" />,
       title: 'UI/UX Design',
       description: 'Intuitive interfaces that users love to interact with',
+    },
+    {
+      icon: <Layers className="w-8 h-8" />,
+      title: 'Strategy',
+      description: 'Data-driven digital strategies that align with your business goals and drive growth',
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8" />,
+      title: 'SEO / AEO',
+      description: 'Dominate search results and answer engines with cutting-edge optimization techniques',
+    },
+    {
+      icon: <Target className="w-8 h-8" />,
+      title: 'CRO',
+      description: 'Conversion rate optimization that turns your visitors into paying customers',
+    },
+    {
+      icon: <Bot className="w-8 h-8" />,
+      title: 'AI Integration',
+      description: 'Embed intelligent AI features into your product to automate and personalize experiences',
     },
   ];
 
