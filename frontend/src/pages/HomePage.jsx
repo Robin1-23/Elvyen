@@ -5,9 +5,6 @@ import { ArrowRight, Sparkles, Zap, Code, Palette } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
 import ScheduleMeeting from '../components/ScheduleMeeting';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const HomePage = () => {
   const heroRef = useRef(null);
@@ -28,17 +25,7 @@ const HomePage = () => {
       });
     }
 
-    // Parallax effect for hero elements
-    gsap.to('.hero-subtitle', {
-      y: 100,
-      opacity: 0.5,
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-      },
-    });
+
   }, []);
 
   const featuredProjects = [
