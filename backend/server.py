@@ -11,6 +11,8 @@ import uuid
 from datetime import datetime, timezone
 import asyncio
 import resend
+import ssl
+import certifi
 
 # Configure logging FIRST — before it's used anywhere
 logging.basicConfig(
@@ -24,10 +26,11 @@ load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
-import certifi
 client = AsyncIOMotorClient(
     mongo_url,
-    tlsCAFile=certifi.where()
+    tls=True,
+    tlsCAFile=certifi.where(),
+    ssl_context=ssl.create_default_context(cafile=certifi.where()),
 )
 db = client[os.environ['DB_NAME']]
 
