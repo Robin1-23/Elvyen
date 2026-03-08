@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CustomCursor from './components/CustomCursor';
@@ -9,9 +10,19 @@ import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
-import './App.css'; // FIX: was '@/App.css' — alias imports don't work for CSS in CRA/CRACO without extra config
+import './App.css';
 
 function App() {
+  // Keep Render backend alive — pings every 10 minutes to prevent spin-down
+  useEffect(() => {
+    const keepAlive = setInterval(() => {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/`)
+        .catch(() => {}); // silent fail — won't affect user
+    }, 10 * 60 * 1000);
+
+    return () => clearInterval(keepAlive);
+  }, []);
+
   return (
     <BrowserRouter>
       <SmoothScroll>
