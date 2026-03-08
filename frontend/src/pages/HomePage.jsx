@@ -124,11 +124,11 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12" data-testid="hero-section">
+      {/* Hero Section — FIX: added pt-28 md:pt-32 to prevent navbar overlap */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12 pt-28 md:pt-32" data-testid="hero-section">
         {/* Animated Glow */}
         <div className="hero-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/10 rounded-full blur-3xl" />
-        
+
         {/* Floating Elements */}
         <motion.div
           className="absolute top-20 right-20 w-2 h-2 bg-cyan-500 rounded-full"
