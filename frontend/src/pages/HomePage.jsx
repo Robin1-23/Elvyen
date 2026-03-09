@@ -314,12 +314,17 @@ const HomePage = () => {
               </Link>
             </MagneticButton>
 
-            <MagneticButton
-              data-testid="start-project-btn"
-              className="px-8 py-4 border border-white/20 text-white rounded-full font-medium hover:bg-white/10 transition-colors"
-            >
-              <Link to="/contact">Start a Project</Link>
-            </MagneticButton>
+            <div className="relative group">
+              {/* Pulsing rings */}
+              <span className="absolute inset-0 rounded-full bg-cyan-500/30 animate-ping" />
+              <span className="absolute inset-0 rounded-full bg-cyan-500/20 animate-pulse" />
+              <MagneticButton
+                data-testid="start-project-btn"
+                className="relative px-8 py-4 border-2 border-cyan-500 text-white rounded-full font-medium bg-black hover:bg-cyan-500/10 transition-colors"
+              >
+                <Link to="/contact">Make It Real</Link>
+              </MagneticButton>
+            </div>
           </motion.div>
         </div>
       </section>
