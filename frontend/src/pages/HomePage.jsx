@@ -1,10 +1,122 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Zap, Code, Palette, TrendingUp, Target, Bot, Layers, BarChart3 } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Code, Palette, TrendingUp, Target, Bot, Layers, BarChart3, ChevronLeft, ChevronRight } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
 import ScheduleMeeting from '../components/ScheduleMeeting';
 import gsap from 'gsap';
+
+const testimonials = [
+  { name: 'Sarah Johnson', company: 'TechStart Inc.', role: 'CEO', review: 'Elvyen transformed our digital presence completely. Their attention to detail and modern design approach exceeded our expectations.', rating: 5, image: '👩‍💼' },
+  { name: 'Michael Chen', company: 'InnovateLabs', role: 'Product Manager', review: 'Outstanding work! The team delivered a stunning website with smooth animations and excellent user experience. Highly recommended.', rating: 5, image: '👨‍💻' },
+  { name: 'Emily Rodriguez', company: 'Creative Studios', role: 'Design Director', review: 'Working with Elvyen was seamless. They understood our vision and brought it to life with cutting-edge technology and beautiful design.', rating: 5, image: '👩‍🎨' },
+  { name: 'David Park', company: 'GrowthHub', role: 'Founder', review: 'The web application they built for us is fast, responsive, and exactly what we needed. Great communication throughout the project.', rating: 5, image: '👨‍💼' },
+  { name: 'Priya Sharma', company: 'DesignCo', role: 'Creative Lead', review: 'Incredible attention to detail and creativity. Elvyen delivered a premium digital experience that our users love.', rating: 5, image: '👩‍💻' },
+  { name: 'James Wilson', company: 'StartupVentures', role: 'CTO', review: 'Professional, skilled, and innovative. They took our startup to the next level with their exceptional web development expertise.', rating: 5, image: '👨‍🔬' },
+];
+
+const StarRating = () => (
+  <div className="flex gap-1 mb-4">
+    {[...Array(5)].map((_, i) => (
+      <svg key={i} className="w-5 h-5 text-cyan-500" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+    ))}
+  </div>
+);
+
+const ReviewCard = ({ testimonial }) => (
+  <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-500 h-full flex flex-col">
+    <StarRating />
+    <p className="text-gray-300 leading-relaxed mb-6 italic flex-1">"{testimonial.review}"</p>
+    <div className="flex items-center gap-4 pt-4 border-t border-white/10">
+      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl flex-shrink-0">
+        {testimonial.image}
+      </div>
+      <div>
+        <p className="font-heading font-bold text-white">{testimonial.name}</p>
+        <p className="text-sm text-gray-400">{testimonial.role} at {testimonial.company}</p>
+      </div>
+    </div>
+  </div>
+);
+
+const ReviewsSection = () => {
+  const [current, setCurrent] = useState(0);
+  const touchStartX = useRef(null);
+
+  const prev = () => setCurrent((c) => (c === 0 ? testimonials.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1));
+
+  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 50) next();
+    else if (diff < -50) prev();
+    touchStartX.current = null;
+  };
+
+  return (
+    <section className="py-24 md:py-32 px-6 md:px-12 bg-white/[0.02]" data-testid="reviews-section">
+      <div className="max-w-7xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="mb-16 text-center">
+          <p className="text-cyan-500 font-mono text-sm mb-4">TESTIMONIALS</p>
+          <h2 className="font-heading text-4xl md:text-6xl font-bold tracking-tight">What Clients Say</h2>
+          <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">Don't just take our word for it - hear from our satisfied clients</p>
+        </motion.div>
+
+        {/* Desktop Grid */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((t, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: i * 0.1 }} viewport={{ once: true }}>
+              <ReviewCard testimonial={t} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Mobile Swipeable Carousel */}
+        <div className="md:hidden">
+          <div
+            className="relative overflow-hidden rounded-2xl"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -60 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ReviewCard testimonial={testimonials[current]} />
+            </motion.div>
+          </div>
+
+          {/* Dots + Arrows */}
+          <div className="flex items-center justify-between mt-6">
+            <button onClick={prev} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-cyan-500/20 transition-colors">
+              <ChevronLeft className="w-5 h-5 text-white" />
+            </button>
+
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button key={i} onClick={() => setCurrent(i)} className={`w-2 h-2 rounded-full transition-all ${i === current ? 'bg-cyan-500 w-6' : 'bg-white/20'}`} />
+              ))}
+            </div>
+
+            <button onClick={next} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-cyan-500/20 transition-colors">
+              <ChevronRight className="w-5 h-5 text-white" />
+            </button>
+          </div>
+
+          {/* Swipe hint */}
+          <p className="text-center text-gray-600 text-xs mt-4">← Swipe to see more →</p>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const HomePage = () => {
   const heroRef = useRef(null);
@@ -355,120 +467,7 @@ const HomePage = () => {
       </section>
 
       {/* Customer Reviews */}
-      <section className="py-24 md:py-32 px-6 md:px-12 bg-white/[0.02]" data-testid="reviews-section">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-16 text-center"
-          >
-            <p className="text-cyan-500 font-mono text-sm mb-4">TESTIMONIALS</p>
-            <h2 className="font-heading text-4xl md:text-6xl font-bold tracking-tight">
-              What Clients Say
-            </h2>
-            <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">
-              Don't just take our word for it - hear from our satisfied clients
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Sarah Johnson',
-                company: 'TechStart Inc.',
-                role: 'CEO',
-                review: 'Elvyen transformed our digital presence completely. Their attention to detail and modern design approach exceeded our expectations.',
-                rating: 5,
-                image: '👩‍💼',
-              },
-              {
-                name: 'Michael Chen',
-                company: 'InnovateLabs',
-                role: 'Product Manager',
-                review: 'Outstanding work! The team delivered a stunning website with smooth animations and excellent user experience. Highly recommended.',
-                rating: 5,
-                image: '👨‍💻',
-              },
-              {
-                name: 'Emily Rodriguez',
-                company: 'Creative Studios',
-                role: 'Design Director',
-                review: 'Working with Elvyen was seamless. They understood our vision and brought it to life with cutting-edge technology and beautiful design.',
-                rating: 5,
-                image: '👩‍🎨',
-              },
-              {
-                name: 'David Park',
-                company: 'GrowthHub',
-                role: 'Founder',
-                review: 'The web application they built for us is fast, responsive, and exactly what we needed. Great communication throughout the project.',
-                rating: 5,
-                image: '👨‍💼',
-              },
-              {
-                name: 'Priya Sharma',
-                company: 'DesignCo',
-                role: 'Creative Lead',
-                review: 'Incredible attention to detail and creativity. Elvyen delivered a premium digital experience that our users love.',
-                rating: 5,
-                image: '👩‍💻',
-              },
-              {
-                name: 'James Wilson',
-                company: 'StartupVentures',
-                role: 'CTO',
-                review: 'Professional, skilled, and innovative. They took our startup to the next level with their exceptional web development expertise.',
-                rating: 5,
-                image: '👨‍🔬',
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-cyan-500/50 transition-all duration-500"
-                data-testid={`review-card-${index}`}
-              >
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-5 h-5 text-cyan-500"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-
-                {/* Review Text */}
-                <p className="text-gray-300 leading-relaxed mb-6 italic">
-                  "{testimonial.review}"
-                </p>
-
-                {/* Customer Info */}
-                <div className="flex items-center gap-4 pt-4 border-t border-white/10">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-2xl">
-                    {testimonial.image}
-                  </div>
-                  <div>
-                    <p className="font-heading font-bold text-white">{testimonial.name}</p>
-                    <p className="text-sm text-gray-400">
-                      {testimonial.role} at {testimonial.company}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ReviewsSection />
 
       {/* Schedule Meeting */}
       <ScheduleMeeting />
