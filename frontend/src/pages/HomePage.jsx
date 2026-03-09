@@ -469,6 +469,34 @@ const HomePage = () => {
       {/* Customer Reviews */}
       <ReviewsSection />
 
+      {/* Stats Section */}
+      <section className="py-16 md:py-20 px-6 md:px-12 border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+            {[
+              { number: '50+', label: 'Projects Delivered' },
+              { number: '30+', label: 'Happy Clients' },
+              { number: '5+', label: 'Years Experience' },
+              { number: '98%', label: 'Client Satisfaction' },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <p className="font-heading text-5xl md:text-6xl font-bold text-cyan-500 mb-2">
+                  {stat.number}
+                </p>
+                <p className="text-gray-400 text-sm md:text-base">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Schedule Meeting */}
       <ScheduleMeeting />
 
