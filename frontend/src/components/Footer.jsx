@@ -20,44 +20,43 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-black border-t border-white/10">
+    <footer className="relative z-10 bg-black border-t border-white/10">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-6" data-testid="footer-logo">
-              <img 
-                src="https://customer-assets.emergentagent.com/job_flux-digital-1/artifacts/py96ij7q_IMG_1020-removebg-preview.png" 
-                alt="Elvyen Logo" 
+              <img
+                src="https://customer-assets.emergentagent.com/job_flux-digital-1/artifacts/py96ij7q_IMG_1020-removebg-preview.png"
+                alt="Elvyen Logo"
                 className="h-12 w-auto"
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Creating exceptional digital experiences for startups and businesses worldwide.
             </p>
-            <div className="flex items-center gap-2">
-              <Link 
-                to="/contact" 
-                data-testid="footer-cta"
-                className="inline-flex items-center gap-2 text-cyan-500 text-sm font-medium hover:gap-3 transition-all group"
-              >
-                Start Your Project
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+            <Link
+              to="/contact"
+              data-testid="footer-cta"
+              className="inline-flex items-center gap-2 text-cyan-500 text-sm font-medium hover:gap-3 transition-all group"
+            >
+              Start Your Project
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
           {/* Company Links */}
-          <div>
+          <div className="relative z-10">
             <h3 className="font-heading text-lg font-bold mb-6 text-white">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
-                <li key={link.path}>
+                <li key={link.path + link.name}>
                   <Link
                     to={link.path}
                     data-testid={`footer-link-${link.name.toLowerCase()}`}
-                    className="text-gray-400 text-sm hover:text-cyan-500 transition-colors inline-block"
+                    className="text-gray-400 text-sm hover:text-cyan-500 transition-colors block py-1 cursor-pointer"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     {link.name}
                   </Link>
@@ -67,7 +66,7 @@ const Footer = () => {
           </div>
 
           {/* Services Links */}
-          <div>
+          <div className="relative z-10">
             <h3 className="font-heading text-lg font-bold mb-6 text-white">Services</h3>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
@@ -75,7 +74,8 @@ const Footer = () => {
                   <Link
                     to={link.path}
                     data-testid={`footer-service-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="text-gray-400 text-sm hover:text-cyan-500 transition-colors inline-block"
+                    className="text-gray-400 text-sm hover:text-cyan-500 transition-colors block py-1 cursor-pointer"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     {link.name}
                   </Link>
@@ -85,7 +85,7 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
+          <div className="relative z-10">
             <h3 className="font-heading text-lg font-bold mb-6 text-white">Get In Touch</h3>
             <div className="space-y-4">
               <a
@@ -98,7 +98,7 @@ const Footer = () => {
                   workelvyen@gmail.com
                 </span>
               </a>
-              
+
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <Phone className="w-5 h-5 flex-shrink-0 mt-0.5 text-cyan-500" />
                 <div className="space-y-1">
@@ -110,7 +110,7 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-cyan-500" />
                 <span>
@@ -123,25 +123,26 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-white/10 relative z-10">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-sm" data-testid="footer-copyright">
               © {currentYear} Elvyen. All rights reserved.
             </p>
-            
             <div className="flex items-center gap-6">
-              <Link 
-                to="/about" 
+              <Link
+                to="/about"
                 className="text-gray-500 text-sm hover:text-cyan-500 transition-colors"
                 data-testid="footer-bottom-privacy"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 Privacy Policy
               </Link>
-              <Link 
-                to="/about" 
+              <Link
+                to="/about"
                 className="text-gray-500 text-sm hover:text-cyan-500 transition-colors"
                 data-testid="footer-bottom-terms"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 Terms of Service
               </Link>
@@ -151,7 +152,7 @@ const Footer = () => {
       </div>
 
       {/* Decorative Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent pointer-events-none" />
     </footer>
   );
 };
