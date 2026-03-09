@@ -85,7 +85,7 @@ const Navigation = () => {
             data-testid="nav-cta-button"
             className="hidden md:block px-6 py-3 bg-cyan-500 text-black rounded-full font-medium hover:bg-cyan-400 transition-colors"
           >
-            Start Project
+            Make It Real
           </Link>
 
           {/* Mobile Menu Toggle */}
