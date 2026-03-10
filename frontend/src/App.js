@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import CustomCursor from './components/CustomCursor';
@@ -10,49 +10,46 @@ import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
+import LoadingScreen from './components/LoadingScreen';
 import './App.css';
 
 function App() {
-  // Keep Render backend alive — pings every 10 minutes to prevent spin-down
-  useEffect(() => {
-    const keepAlive = setInterval(() => {
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/`)
-        .catch(() => {}); // silent fail — won't affect user
-    }, 10 * 60 * 1000);
-
-    return () => clearInterval(keepAlive);
-  }, []);
+  const [loading, setLoading] = useState(true);
 
   return (
-    <BrowserRouter>
-      <SmoothScroll>
-        <div className="App relative">
-          {/* Noise Overlay */}
-          <div className="noise-overlay" />
+    <>
+      {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
 
-          {/* Custom Cursor */}
-          <CustomCursor />
+      <BrowserRouter>
+        <SmoothScroll>
+          <div className="App relative">
+            {/* Noise Overlay */}
+            <div className="noise-overlay" />
 
-          {/* Navigation */}
-          <Navigation />
+            {/* Custom Cursor */}
+            <CustomCursor />
 
-          {/* Routes */}
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
+            {/* Navigation */}
+            <Navigation />
 
-          {/* Footer */}
-          <Footer />
+            {/* Routes */}
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+            </Routes>
 
-          {/* WhatsApp Floating Button */}
-          <WhatsAppButton />
-        </div>
-      </SmoothScroll>
-    </BrowserRouter>
+            {/* Footer */}
+            <Footer />
+
+            {/* WhatsApp Floating Button */}
+            <WhatsAppButton />
+          </div>
+        </SmoothScroll>
+      </BrowserRouter>
+    </>
   );
 }
 
