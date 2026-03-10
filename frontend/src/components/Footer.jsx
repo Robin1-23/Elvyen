@@ -1,8 +1,22 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const glitchRef = useRef(null);
+
+  // Glitch effect trigger randomly
+  useEffect(() => {
+    const el = glitchRef.current;
+    if (!el) return;
+    const triggerGlitch = () => {
+      el.classList.add('glitching');
+      setTimeout(() => el.classList.remove('glitching'), 600);
+    };
+    const interval = setInterval(triggerGlitch, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const footerLinks = {
     company: [
@@ -20,7 +34,72 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative z-10 bg-black border-t border-white/10">
+    <footer className="relative z-10 bg-black border-t border-white/10 overflow-hidden">
+
+      {/* Glitch CSS */}
+      <style>{`
+        .glitch-text {
+          position: relative;
+          -webkit-text-stroke: 1.5px rgba(0, 240, 255, 0.15);
+          color: transparent;
+          font-size: clamp(5rem, 18vw, 18rem);
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          line-height: 0.85;
+          user-select: none;
+          transition: -webkit-text-stroke 0.3s;
+        }
+        .glitch-text::before,
+        .glitch-text::after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0; left: 0;
+          -webkit-text-stroke: 1.5px rgba(0, 240, 255, 0.15);
+          color: transparent;
+          opacity: 0;
+        }
+        .glitching::before {
+          opacity: 1;
+          -webkit-text-stroke: 2px rgba(0, 240, 255, 0.6);
+          animation: glitch-1 0.15s steps(2) 3;
+          clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+        }
+        .glitching::after {
+          opacity: 1;
+          -webkit-text-stroke: 2px rgba(255, 0, 128, 0.4);
+          animation: glitch-2 0.15s steps(2) 3;
+          clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+        }
+        .glitching {
+          -webkit-text-stroke: 2px rgba(0, 240, 255, 0.5);
+          filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.3));
+        }
+        @keyframes glitch-1 {
+          0%   { transform: translate(-4px, 0); }
+          50%  { transform: translate(4px, 0); }
+          100% { transform: translate(-2px, 0); }
+        }
+        @keyframes glitch-2 {
+          0%   { transform: translate(4px, 0); }
+          50%  { transform: translate(-4px, 0); }
+          100% { transform: translate(2px, 0); }
+        }
+
+        /* Marquee */
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee-scroll 18s linear infinite;
+        }
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
+        @keyframes marquee-scroll {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -98,7 +177,6 @@ const Footer = () => {
                   workelvyen@gmail.com
                 </span>
               </a>
-
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <Phone className="w-5 h-5 flex-shrink-0 mt-0.5 text-cyan-500" />
                 <div className="space-y-1">
@@ -110,15 +188,37 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5 text-cyan-500" />
-                <span>
-                  New Delhi<br />India
-                </span>
+                <span>New Delhi<br />India</span>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* ✨ Marquee Strip */}
+      <div className="border-t border-white/5 py-4 overflow-hidden">
+        <div className="marquee-track">
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className="text-white/10 text-sm font-mono uppercase tracking-[0.3em] px-8 flex-shrink-0">
+              ELVYEN · WEB DESIGN · DEVELOPMENT · UI/UX · DIGITAL EXPERIENCES ·&nbsp;
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* 🔥 Giant Glitch ELVYEN Text */}
+      <div className="relative overflow-hidden py-4 px-6 md:px-12">
+        {/* Cyan glow behind text */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-cyan-500/5 blur-3xl rounded-full pointer-events-none" />
+
+        <div
+          ref={glitchRef}
+          data-text="ELVYEN"
+          className="glitch-text select-none"
+        >
+          ELVYEN
         </div>
       </div>
 
@@ -133,7 +233,6 @@ const Footer = () => {
               <Link
                 to="/about"
                 className="text-gray-500 text-sm hover:text-cyan-500 transition-colors"
-                data-testid="footer-bottom-privacy"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 Privacy Policy
@@ -141,7 +240,6 @@ const Footer = () => {
               <Link
                 to="/about"
                 className="text-gray-500 text-sm hover:text-cyan-500 transition-colors"
-                data-testid="footer-bottom-terms"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 Terms of Service
@@ -151,7 +249,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Decorative Glow */}
+      {/* Decorative top glow line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent pointer-events-none" />
     </footer>
   );
