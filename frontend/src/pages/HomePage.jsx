@@ -242,6 +242,7 @@ const HomePage = () => {
   ];
 
   return (
+    <>
     <div className="min-h-screen">
       {/* Hero Section — FIX: added pt-28 md:pt-32 to prevent navbar overlap */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12 pt-28 md:pt-32" data-testid="hero-section">
@@ -603,11 +604,9 @@ const HomePage = () => {
 
       {/* Sticky Social Sidebar */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4">
-        {/* Line top */}
         <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20" />
-
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/elvyen.co"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-black/60 backdrop-blur-sm hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-300"
@@ -615,9 +614,8 @@ const HomePage = () => {
         >
           <Instagram className="w-4 h-4 text-gray-400 group-hover:text-cyan-500 transition-colors" />
         </a>
-
         <a
-          href="https://www.linkedin.com"
+          href="https://www.linkedin.com/company/elvyen"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-black/60 backdrop-blur-sm hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-300"
@@ -625,19 +623,16 @@ const HomePage = () => {
         >
           <Linkedin className="w-4 h-4 text-gray-400 group-hover:text-cyan-500 transition-colors" />
         </a>
-
-        {/* Follow Us text */}
         <p
           className="text-gray-500 text-xs font-mono tracking-widest"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           FOLLOW US
         </p>
-
-        {/* Line bottom */}
         <div className="w-px h-12 bg-gradient-to-b from-white/20 to-transparent" />
       </div>
     </div>
+    </>
   );
 };
 
