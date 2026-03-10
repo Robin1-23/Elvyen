@@ -19,20 +19,53 @@ const ScheduleMeeting = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    // Only allow numbers for phone
+    if (name === 'phone') {
+      const numericOnly = value.replace(/[^0-9+\-\s()]/g, '');
+      setFormData({ ...formData, [name]: numericOnly });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
     setError('');
+    // Clear field-specific error
+    setFieldErrors((prev) => ({ ...prev, [name]: '' }));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.fullName.trim()) errors.fullName = 'Full name is required';
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone number is required';
+    } else if (formData.phone.replace(/\D/g, '').length < 10) {
+      errors.phone = 'Please enter a valid phone number (min 10 digits)';
+    }
+    if (!formData.company.trim()) errors.company = 'Company / Project type is required';
+    if (!formData.date) errors.date = 'Please select a date';
+    if (!formData.time) errors.time = 'Please select a time';
+    if (!formData.message.trim()) errors.message = 'Please tell us about your project';
+    return errors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validation
-    if (!formData.fullName || !formData.email || !formData.phone || !formData.date || !formData.time) {
-      setError('Please fill in all required fields');
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      setError('Please fix the errors below before submitting.');
       return;
     }
+    setFieldErrors({});
 
     setLoading(true);
     setError('');
@@ -139,11 +172,11 @@ const ScheduleMeeting = () => {
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleChange}
-                  required
                   data-testid="meeting-input-name"
-                  className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                  className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors ${fieldErrors.fullName ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                   placeholder="John Doe"
                 />
+                {fieldErrors.fullName && <p className="text-red-400 text-xs mt-1">{fieldErrors.fullName}</p>}
               </div>
 
               <div>
@@ -157,11 +190,11 @@ const ScheduleMeeting = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
                   data-testid="meeting-input-email"
-                  className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                  className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors ${fieldErrors.email ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                   placeholder="john@example.com"
                 />
+                {fieldErrors.email && <p className="text-red-400 text-xs mt-1">{fieldErrors.email}</p>}
               </div>
             </div>
 
@@ -178,17 +211,19 @@ const ScheduleMeeting = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  required
+                  inputMode="numeric"
+                  maxLength={15}
                   data-testid="meeting-input-phone"
-                  className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                  className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors ${fieldErrors.phone ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                   placeholder="+91 9306928510"
                 />
+                {fieldErrors.phone && <p className="text-red-400 text-xs mt-1">{fieldErrors.phone}</p>}
               </div>
 
               <div>
                 <label htmlFor="company" className="flex items-center gap-2 text-sm font-medium mb-2">
                   <Briefcase className="w-4 h-4 text-cyan-500" />
-                  Company / Project Type
+                  Company / Project Type *
                 </label>
                 <input
                   type="text"
@@ -197,9 +232,10 @@ const ScheduleMeeting = () => {
                   value={formData.company}
                   onChange={handleChange}
                   data-testid="meeting-input-company"
-                  className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                  className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors ${fieldErrors.company ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                   placeholder="Company Name or Project Type"
                 />
+                {fieldErrors.company && <p className="text-red-400 text-xs mt-1">{fieldErrors.company}</p>}
               </div>
             </div>
 
@@ -216,11 +252,11 @@ const ScheduleMeeting = () => {
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
-                  required
                   min={new Date().toISOString().split('T')[0]}
                   data-testid="meeting-input-date"
-                  className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors [color-scheme:dark]"
+                  className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors [color-scheme:dark] ${fieldErrors.date ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                 />
+                {fieldErrors.date && <p className="text-red-400 text-xs mt-1">{fieldErrors.date}</p>}
               </div>
 
               <div>
@@ -234,10 +270,10 @@ const ScheduleMeeting = () => {
                   name="time"
                   value={formData.time}
                   onChange={handleChange}
-                  required
                   data-testid="meeting-input-time"
-                  className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors [color-scheme:dark]"
+                  className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors [color-scheme:dark] ${fieldErrors.time ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                 />
+                {fieldErrors.time && <p className="text-red-400 text-xs mt-1">{fieldErrors.time}</p>}
               </div>
             </div>
 
@@ -245,7 +281,7 @@ const ScheduleMeeting = () => {
             <div>
               <label htmlFor="message" className="flex items-center gap-2 text-sm font-medium mb-2">
                 <MessageSquare className="w-4 h-4 text-cyan-500" />
-                Message / Project Details
+                Message / Project Details *
               </label>
               <textarea
                 id="message"
@@ -254,9 +290,10 @@ const ScheduleMeeting = () => {
                 onChange={handleChange}
                 rows="4"
                 data-testid="meeting-input-message"
-                className="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors resize-none"
+                className={`w-full px-6 py-4 bg-black/50 border rounded-xl text-white placeholder-gray-500 focus:outline-none transition-colors resize-none ${fieldErrors.message ? 'border-red-500' : 'border-white/10 focus:border-cyan-500'}`}
                 placeholder="Tell us about your project or what you'd like to discuss..."
               />
+              {fieldErrors.message && <p className="text-red-400 text-xs mt-1">{fieldErrors.message}</p>}
             </div>
 
             {/* Error Message */}
