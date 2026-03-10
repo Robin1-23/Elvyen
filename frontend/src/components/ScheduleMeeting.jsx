@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User, Mail, Phone, Briefcase, MessageSquare, Send } from 'lucide-react';
-import MagneticButton from './MagneticButton'; // FIX: was '../components/MagneticButton' — adjust to your actual folder structure
-import axios from 'axios';
+import MagneticButton from '../components/MagneticButton';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -29,41 +28,61 @@ const ScheduleMeeting = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation
     if (!formData.fullName || !formData.email || !formData.phone || !formData.date || !formData.time) {
       setError('Please fill in all required fields');
-      return;
-    }
-
-    // FIX: Validate REACT_APP_BACKEND_URL is set
-    if (!BACKEND_URL) {
-      setError('Configuration error: Backend URL is not set. Please contact support.');
       return;
     }
 
     setLoading(true);
     setError('');
 
-    try {
-      const response = await axios.post(`${API}/schedule-meeting`, formData);
+    // Timeout controller - 10 seconds max
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
 
-      if (response.data.status === 'success') {
-        setSubmitted(true);
-        setTimeout(() => {
-          setSubmitted(false);
-          setFormData({
-            fullName: '',
-            email: '',
-            phone: '',
-            company: '',
-            date: '',
-            time: '',
-            message: '',
-          });
-        }, 8000);
+    try {
+      const backendUrl = process.env.REACT_APP_BACKEND_URL;
+      const response = await fetch(`${backendUrl}/api/schedule-meeting`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.status === 'success' || response.status === 200) {
+          setSubmitted(true);
+          setTimeout(() => {
+            setSubmitted(false);
+            setFormData({
+              fullName: '',
+              email: '',
+              phone: '',
+              company: '',
+              date: '',
+              time: '',
+              message: '',
+            });
+          }, 8000);
+        } else {
+          setError('Something went wrong. Please try again.');
+        }
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        setError(errData.detail || 'Failed to schedule meeting. Please try WhatsApp instead.');
       }
     } catch (err) {
-      console.error('Error scheduling meeting:', err);
-      setError(err.response?.data?.detail || 'Failed to schedule meeting. Please try again or contact us directly.');
+      clearTimeout(timeout);
+      if (err.name === 'AbortError') {
+        setError('Request timed out. Please check your connection or use WhatsApp.');
+      } else {
+        setError('Unable to connect. Please try WhatsApp or email us directly.');
+      }
+      console.error('Meeting scheduling error:', err);
     } finally {
       setLoading(false);
     }
