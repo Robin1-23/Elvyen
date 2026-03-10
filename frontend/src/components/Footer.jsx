@@ -42,12 +42,15 @@ const Footer = () => {
           position: relative;
           -webkit-text-stroke: 1.5px rgba(0, 240, 255, 0.15);
           color: transparent;
-          font-size: clamp(5rem, 18vw, 18rem);
+          font-size: clamp(3rem, 15vw, 14rem);
           font-weight: 900;
-          letter-spacing: -0.02em;
+          letter-spacing: 0.05em;
           line-height: 0.85;
           user-select: none;
           transition: -webkit-text-stroke 0.3s;
+          text-align: center;
+          width: 100%;
+          display: block;
         }
         .glitch-text::before,
         .glitch-text::after {
@@ -209,14 +212,14 @@ const Footer = () => {
       </div>
 
       {/* 🔥 Giant Glitch ELVYEN Text */}
-      <div className="relative overflow-hidden py-4 px-6 md:px-12">
+      <div className="relative overflow-hidden py-4 px-6 md:px-12 flex justify-center items-center">
         {/* Cyan glow behind text */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-cyan-500/5 blur-3xl rounded-full pointer-events-none" />
 
         <div
           ref={glitchRef}
           data-text="ELVYEN"
-          className="glitch-text select-none"
+          className="glitch-text select-none text-center"
         >
           ELVYEN
         </div>
