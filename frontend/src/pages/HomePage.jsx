@@ -475,71 +475,70 @@ const HomePage = () => {
       <ReviewsSection />
 
       {/* Trusted Partners Marquee */}
-      <section className="py-16 md:py-20 px-6 md:px-12 border-t border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-10"
-          >
-            <p className="text-cyan-500 font-mono text-xs uppercase tracking-widest mb-3">Tech Stack & Partnerships</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-white">
-              Built With the <br />
-              <span className="relative inline-block">
-                World's Leading Platforms
-                <span className="absolute -bottom-1 left-0 w-full h-1 bg-cyan-500/60 rounded-full" />
-              </span>
-            </h2>
-          </motion.div>
+      <section className="py-16 md:py-20 border-t border-white/10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12 px-6"
+        >
+          <p className="text-cyan-500 font-mono text-xs uppercase tracking-[0.3em] mb-4">Powered By</p>
+          <h2 className="font-heading text-3xl md:text-5xl font-bold text-white">
+            We Build With The
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              Best In The World
+            </span>
+          </h2>
+        </motion.div>
 
-          {/* Scrolling logos */}
-          <div className="overflow-hidden relative">
-            {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        {/* Seamless scrolling logos — no gaps, no breaks */}
+        <div className="overflow-hidden relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-            <style>{`
-              .partners-track {
-                display: flex;
-                width: max-content;
-                animation: partners-scroll 25s linear infinite;
-              }
-              .partners-track:hover { animation-play-state: paused; }
-              @keyframes partners-scroll {
-                0%   { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-              }
-            `}</style>
+          <style>{`
+            .partners-track {
+              display: flex;
+              align-items: center;
+              width: max-content;
+              animation: partners-scroll 30s linear infinite;
+            }
+            @keyframes partners-scroll {
+              0%   { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+          `}</style>
 
-            <div className="partners-track">
-              {[...Array(2)].map((_, repeat) => (
-                <div key={repeat} className="flex items-center gap-16 px-8">
-                  {[
-                    { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
-                    { name: 'Google Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Google-cloud-platform.svg' },
-                    { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg' },
-                    { name: 'Vercel', logo: 'https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png' },
-                    { name: 'MongoDB', logo: 'https://www.vectorlogo.zone/logos/mongodb/mongodb-ar21.svg' },
-                    { name: 'React', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
-                    { name: 'Stripe', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg' },
-                    { name: 'Figma', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg' },
-                  ].map((partner) => (
-                    <div
-                      key={partner.name + repeat}
-                      className="flex items-center justify-center h-10 opacity-40 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
-                    >
-                      <img
-                        src={partner.logo}
-                        alt={partner.name}
-                        className="h-8 w-auto object-contain filter brightness-0 invert"
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
+          <div className="partners-track">
+            {[...Array(2)].map((_, repeat) => (
+              <div key={repeat} className="flex items-center">
+                {[
+                  { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
+                  { name: 'Google Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Google-cloud-platform.svg' },
+                  { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg' },
+                  { name: 'Salesforce', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg' },
+                  { name: 'ServiceNow', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/57/ServiceNow_logo.svg' },
+                  { name: 'React', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
+                  { name: 'Figma', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg' },
+                  { name: 'Stripe', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg' },
+                ].map((partner) => (
+                  <div
+                    key={partner.name + repeat}
+                    className="flex items-center justify-center opacity-30 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 px-12"
+                  >
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="h-7 w-auto object-contain filter brightness-0 invert"
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
