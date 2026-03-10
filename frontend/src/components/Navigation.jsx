@@ -12,7 +12,6 @@ const Navigation = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -40,17 +39,13 @@ const Navigation = () => {
             : 'bg-transparent'
         }`}
       >
-        <div className="px-6 md:px-8 py-4 flex items-center justify-between">
-          {/* Logo */}
-          <Link
-            to="/"
-            data-testid="nav-logo"
-            className="relative z-10"
-          >
-            <img 
-              src="https://customer-assets.emergentagent.com/job_flux-digital-1/artifacts/py96ij7q_IMG_1020-removebg-preview.png" 
-              alt="Elvyen Logo" 
-              className="h-14 w-auto"
+        <div className="px-6 md:px-8 py-3 flex items-center justify-between">
+          {/* Logo — increased size */}
+          <Link to="/" data-testid="nav-logo" className="relative z-10">
+            <img
+              src="https://customer-assets.emergentagent.com/job_flux-digital-1/artifacts/py96ij7q_IMG_1020-removebg-preview.png"
+              alt="Elvyen Logo"
+              className="h-20 w-auto"
             />
           </Link>
 
@@ -85,7 +80,7 @@ const Navigation = () => {
             data-testid="nav-cta-button"
             className="hidden md:block px-6 py-3 bg-cyan-500 text-black rounded-full font-medium hover:bg-cyan-400 transition-colors"
           >
-            Make It Real
+            Start Project
           </Link>
 
           {/* Mobile Menu Toggle */}

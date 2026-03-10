@@ -7,12 +7,12 @@ import ScheduleMeeting from '../components/ScheduleMeeting';
 import gsap from 'gsap';
 
 const testimonials = [
-  { name: 'Sarah Johnson', company: 'TechStart Inc.', role: 'CEO', review: 'Elvyen transformed our digital presence completely. Their attention to detail and modern design approach exceeded our expectations.', rating: 5, image: '👩‍💼' },
-  { name: 'Michael Chen', company: 'InnovateLabs', role: 'Product Manager', review: 'Outstanding work! The team delivered a stunning website with smooth animations and excellent user experience. Highly recommended.', rating: 5, image: '👨‍💻' },
-  { name: 'Emily Rodriguez', company: 'Creative Studios', role: 'Design Director', review: 'Working with Elvyen was seamless. They understood our vision and brought it to life with cutting-edge technology and beautiful design.', rating: 5, image: '👩‍🎨' },
-  { name: 'David Park', company: 'GrowthHub', role: 'Founder', review: 'The web application they built for us is fast, responsive, and exactly what we needed. Great communication throughout the project.', rating: 5, image: '👨‍💼' },
-  { name: 'Priya Sharma', company: 'DesignCo', role: 'Creative Lead', review: 'Incredible attention to detail and creativity. Elvyen delivered a premium digital experience that our users love.', rating: 5, image: '👩‍💻' },
-  { name: 'James Wilson', company: 'StartupVentures', role: 'CTO', review: 'Professional, skilled, and innovative. They took our startup to the next level with their exceptional web development expertise.', rating: 5, image: '👨‍🔬' },
+  { name: 'Rahul Mehta', company: 'Zestify Foods', role: 'Founder & CEO', review: 'Elvyen redesigned our entire website and the results were immediate. Our online orders went up by 40% in the first month. Brilliant work and super professional team.', rating: 5, image: '👨‍💼' },
+  { name: 'Ananya Kapoor', company: 'StyleSutra', role: 'Co-Founder', review: 'We needed a complete e-commerce overhaul and Elvyen delivered beyond expectations. The site loads fast, looks stunning on mobile, and our customers love it.', rating: 5, image: '👩‍💼' },
+  { name: 'Vikram Nair', company: 'BuildRight Infra', role: 'Managing Director', review: 'Finally a web agency that actually listens. They built us a lead generation site that has already brought in 3 major contracts. Worth every rupee.', rating: 5, image: '👨‍💻' },
+  { name: 'Sneha Joshi', company: 'MindfulMe App', role: 'Product Lead', review: 'The UI/UX work Elvyen did for our wellness app was exceptional. User retention improved significantly after the redesign. Highly recommended for any startup.', rating: 5, image: '👩‍🎨' },
+  { name: 'Arjun Sharma', company: 'TechSpark Solutions', role: 'CTO', review: 'We hired Elvyen for a complex web application and they nailed it. Clean code, great design, and they delivered on time. Will definitely work with them again.', rating: 5, image: '👨‍🔬' },
+  { name: 'Pooja Agarwal', company: 'EduReach India', role: 'Operations Head', review: 'Our EdTech platform needed a fresh look and Elvyen transformed it completely. The new design is modern, intuitive and our student signups have doubled.', rating: 5, image: '👩‍💻' },
 ];
 
 const StarRating = () => (
