@@ -528,12 +528,14 @@ const HomePage = () => {
                 ].map((partner) => (
                   <div
                     key={partner.name + repeat}
-                    className="flex items-center justify-center opacity-30 hover:opacity-90 transition-opacity duration-300 flex-shrink-0 px-12"
+                    className="flex items-center justify-center opacity-30 hover:opacity-90 transition-opacity duration-300 flex-shrink-0"
+                    style={{ width: '160px' }}
                   >
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      className="h-7 w-auto object-contain filter brightness-0 invert"
+                      className="object-contain filter brightness-0 invert"
+                      style={{ height: '28px', width: '100px', objectFit: 'contain' }}
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
                   </div>
