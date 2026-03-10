@@ -56,36 +56,38 @@ const Footer = () => {
         .glitch-text::after {
           content: attr(data-text);
           position: absolute;
-          top: 0; left: 0;
+          top: 0; left: 0; right: 0;
           -webkit-text-stroke: 1.5px rgba(0, 240, 255, 0.15);
           color: transparent;
+          text-align: center;
+          width: 100%;
           opacity: 0;
         }
         .glitching::before {
           opacity: 1;
-          -webkit-text-stroke: 2px rgba(0, 240, 255, 0.6);
-          animation: glitch-1 0.15s steps(2) 3;
-          clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+          -webkit-text-stroke: 2px rgba(0, 240, 255, 0.7);
+          animation: glitch-1 0.12s steps(2) 4;
+          clip-path: polygon(0 15%, 100% 15%, 100% 40%, 0 40%);
         }
         .glitching::after {
           opacity: 1;
-          -webkit-text-stroke: 2px rgba(255, 0, 128, 0.4);
-          animation: glitch-2 0.15s steps(2) 3;
-          clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+          -webkit-text-stroke: 2px rgba(255, 0, 128, 0.5);
+          animation: glitch-2 0.12s steps(2) 4;
+          clip-path: polygon(0 55%, 100% 55%, 100% 80%, 0 80%);
         }
         .glitching {
-          -webkit-text-stroke: 2px rgba(0, 240, 255, 0.5);
-          filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.3));
+          -webkit-text-stroke: 2px rgba(0, 240, 255, 0.6);
+          filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.35));
         }
         @keyframes glitch-1 {
-          0%   { transform: translate(-4px, 0); }
-          50%  { transform: translate(4px, 0); }
-          100% { transform: translate(-2px, 0); }
+          0%   { transform: translateX(-3px); }
+          50%  { transform: translateX(3px); }
+          100% { transform: translateX(0px); }
         }
         @keyframes glitch-2 {
-          0%   { transform: translate(4px, 0); }
-          50%  { transform: translate(-4px, 0); }
-          100% { transform: translate(2px, 0); }
+          0%   { transform: translateX(3px); }
+          50%  { transform: translateX(-3px); }
+          100% { transform: translateX(0px); }
         }
 
         /* Marquee */
