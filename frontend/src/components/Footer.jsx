@@ -114,7 +114,7 @@ const Footer = () => {
               <img
                 src="https://customer-assets.emergentagent.com/job_flux-digital-1/artifacts/py96ij7q_IMG_1020-removebg-preview.png"
                 alt="Elvyen Logo"
-                className="h-12 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
