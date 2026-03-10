@@ -601,7 +601,6 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-    </div>
 
       {/* Sticky Social Sidebar */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4">
@@ -609,7 +608,7 @@ const HomePage = () => {
         <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20" />
 
         <a
-          href="https://www.instagram.com/elvyen.ai?igsh=MXE0ZWlpYWRqc3p2NQ%3D%3D&utm_source=qr"
+          href="https://www.instagram.com"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-black/60 backdrop-blur-sm hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-300"
@@ -619,7 +618,7 @@ const HomePage = () => {
         </a>
 
         <a
-          href="https://www.linkedin.com/company/elvyen/about/?viewAsMember=true"
+          href="https://www.linkedin.com"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-black/60 backdrop-blur-sm hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-300"
@@ -639,6 +638,7 @@ const HomePage = () => {
         {/* Line bottom */}
         <div className="w-px h-12 bg-gradient-to-b from-white/20 to-transparent" />
       </div>
+    </div>
   );
 };
 
