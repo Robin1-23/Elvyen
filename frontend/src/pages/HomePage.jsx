@@ -516,14 +516,14 @@ const HomePage = () => {
             {[...Array(2)].map((_, repeat) => (
               <div key={repeat} className="flex items-center">
                 {[
-                  { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
-                  { name: 'Google Cloud', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/01/Google-cloud-platform.svg' },
-                  { name: 'Microsoft', logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg' },
-                  { name: 'Salesforce', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg' },
-                  { name: 'ServiceNow', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/57/ServiceNow_logo.svg' },
-                  { name: 'React', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
-                  { name: 'Figma', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg' },
-                  { name: 'Stripe', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg' },
+                  { name: 'AWS', logo: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg' },
+                  { name: 'Google Cloud', logo: 'https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg' },
+                  { name: 'Microsoft', logo: 'https://cdn.worldvectorlogo.com/logos/microsoft-5.svg' },
+                  { name: 'Salesforce', logo: 'https://cdn.worldvectorlogo.com/logos/salesforce-2.svg' },
+                  { name: 'ServiceNow', logo: 'https://cdn.worldvectorlogo.com/logos/servicenow.svg' },
+                  { name: 'React', logo: 'https://cdn.worldvectorlogo.com/logos/react-2.svg' },
+                  { name: 'Figma', logo: 'https://cdn.worldvectorlogo.com/logos/figma-1.svg' },
+                  { name: 'Stripe', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg' },
                 ].map((partner) => (
                   <div
                     key={partner.name + repeat}
