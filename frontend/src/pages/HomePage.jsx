@@ -175,19 +175,19 @@ const HomePage = () => {
     },
     {
       id: 5,
-      title: 'Raycast',
-      category: 'Web Application',
-      description: 'Powerful productivity launcher with elegant dark UI',
-      image: '/images/raycast.jpg',
-      link: 'https://www.raycast.com/',
+      title: 'Atlas Bar',
+      category: 'Website',
+      description: 'Stunning award-winning bar website for Singapore's iconic Atlas — luxury art deco design meets digital elegance.',
+      image: '/images/atlasbar.jpg',
+      link: 'https://atlasbar.sg/',
     },
     {
       id: 6,
-      title: 'Landbook',
-      category: 'UI/UX Design',
-      description: 'Curated collection of beautiful landing page designs',
-      image: '/images/landbook.jpg',
-      link: 'https://land-book.com/',
+      title: 'The Dead Rabbit',
+      category: 'Website',
+      description: 'World's best bar website — immersive storytelling, rich visuals and premium brand experience.',
+      image: '/images/deadrabbit.jpg',
+      link: 'https://www.thedeadrabbit.com/',
     },
   ];
 
@@ -608,7 +608,7 @@ const HomePage = () => {
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4">
         <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20" />
         <a
-          href="https://www.instagram.com/elvyen.ai?igsh=bHo1MWFxNnR3NnB2"
+          href="https://www.instagram.com/elvyen.co"
           target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-black/60 backdrop-blur-sm hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-300"
