@@ -476,71 +476,81 @@ const HomePage = () => {
       <ReviewsSection />
 
       {/* Trusted Partners Marquee */}
-      <section className="py-16 md:py-20 border-t border-white/10">
+      <section className="py-20 md:py-28 border-t border-white/10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 px-6"
+          className="text-center mb-16 px-6"
         >
           <p className="text-cyan-500 font-mono text-xs uppercase tracking-[0.3em] mb-4">Trusted By</p>
-          <h2 className="font-heading text-3xl md:text-5xl font-bold text-white">
-            Companies We've
+          <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-4">
+            Brands We've
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
               Worked With
             </span>
           </h2>
+          <p className="text-gray-400 text-sm">Real projects. Real results. Real brands.</p>
         </motion.div>
 
-        {/* Seamless scrolling client logos */}
         <div className="overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
           <style>{`
-            .partners-track {
+            .marquee-track {
               display: flex;
               align-items: center;
               width: max-content;
-              animation: partners-scroll 30s linear infinite;
+              animation: marquee-scroll 30s linear infinite;
             }
-            @keyframes partners-scroll {
+            .marquee-track:hover { animation-play-state: paused; }
+            @keyframes marquee-scroll {
               0%   { transform: translateX(0); }
               100% { transform: translateX(-50%); }
             }
+            .marquee-logo {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+              margin: 0 48px;
+              opacity: 1;
+              transition: transform 0.3s ease, filter 0.3s ease;
+            }
+            .marquee-logo:hover {
+              transform: scale(1.1);
+            }
+            .marquee-logo img {
+              height: 60px;
+              width: auto;
+              max-width: 180px;
+              object-fit: contain;
+              image-rendering: -webkit-optimize-contrast;
+            }
           `}</style>
 
-          <div className="partners-track">
+          <div className="marquee-track">
             {[...Array(2)].map((_, repeat) => (
-              <div key={repeat} className="flex items-center">
+              <div key={repeat} style={{ display: 'flex', alignItems: 'center' }}>
                 {[
-                  { name: 'Trello', logo: '/images/trello-logo.png' },
-                  { name: 'Superhuman', logo: '/images/superhuman-logo.png' },
-                  { name: 'Target', logo: '/images/target-logo.png' },
-                  { name: 'Synthesia', logo: '/images/synthesia-logo.png' },
-                  { name: 'Atlas Bar', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'Atlas Bar' },
-                  { name: 'Dead Rabbit', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'The Dead Rabbit' },
-                  { name: 'Moti Mahal', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'Moti Mahal' },
-                  { name: 'James Edition', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'James Edition' },
+                  { name: 'Moti Mahal',    logo: '/images/motimahal-logo.png' },
+                  { name: 'Atlas Bar',     logo: '/images/atlasbar-logo.png' },
+                  { name: 'The Dead Rabbit', logo: '/images/deadrabbit-logo.png' },
+                  { name: 'Landbook',      logo: '/images/landbook-logo.png' },
+                  { name: 'James Edition', logo: '/images/jamesedition-logo.png' },
+                  { name: 'Synthesia',     logo: '/images/synthesia-logo.png' },
+                  { name: 'Target',        logo: '/images/target-logo.png' },
+                  { name: 'Superhuman',    logo: '/images/superhuman-logo.png' },
                 ].map((partner) => (
-                  <div
-                    key={partner.name + repeat}
-                    className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
-                    style={{ width: '160px' }}
-                  >
-                    {partner.text ? (
-                      <span className="text-white font-bold text-sm tracking-wider filter brightness-75 hover:brightness-100">{partner.text}</span>
-                    ) : (
-                      <img
-                        src={partner.logo}
-                        alt={partner.name}
-                        className="object-contain"
-                        style={{ height: '32px', width: '110px', objectFit: 'contain' }}
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                      />
-                    )}
+                  <div key={partner.name + repeat} className="marquee-logo">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
                   </div>
                 ))}
               </div>
