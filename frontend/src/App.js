@@ -12,7 +12,6 @@ import PortfolioPage from './pages/PortfolioPage';
 import ContactPage from './pages/ContactPage';
 import LoadingScreen from './components/LoadingScreen';
 import './App.css';
-import LiveVisitors from './components/LiveVisitors';
 
 
 function App() {
@@ -48,7 +47,7 @@ function App() {
 
             {/* WhatsApp Floating Button */}
             <WhatsAppButton />
-            <LiveVisitors />
+            
 
           </div>
         </SmoothScroll>
