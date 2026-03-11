@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Zap, Code, Palette, TrendingUp, Target, Bot, Layers, BarChart3, ChevronLeft, ChevronRight, Instagram, Linkedin } from 'lucide-react';
+import { ArrowRight, Sparkles, Zap, Code, Palette, TrendingUp, Target, Bot, Layers, BarChart3, ChevronLeft, ChevronRight, Instagram, Linkedin, Twitter } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
 import ScheduleMeeting from '../components/ScheduleMeeting';
 import gsap from 'gsap';
@@ -624,6 +624,15 @@ const HomePage = () => {
           title="Follow on LinkedIn"
         >
           <Linkedin className="w-4 h-4 text-gray-400 group-hover:text-cyan-500 transition-colors" />
+        </a>
+        <a
+          href="https://x.com/elvyenai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center justify-center w-9 h-9 rounded-full border border-white/10 bg-black/60 backdrop-blur-sm hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-300"
+          title="Follow on X"
+        >
+          <Twitter className="w-4 h-4 text-gray-400 group-hover:text-cyan-500 transition-colors" />
         </a>
         <p
           className="text-gray-500 text-xs font-mono tracking-widest"
