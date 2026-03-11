@@ -484,19 +484,18 @@ const HomePage = () => {
           viewport={{ once: true }}
           className="text-center mb-12 px-6"
         >
-          <p className="text-cyan-500 font-mono text-xs uppercase tracking-[0.3em] mb-4">Powered By</p>
+          <p className="text-cyan-500 font-mono text-xs uppercase tracking-[0.3em] mb-4">Trusted By</p>
           <h2 className="font-heading text-3xl md:text-5xl font-bold text-white">
-            We Build With The
+            Companies We've
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-              Best In The World
+              Worked With
             </span>
           </h2>
         </motion.div>
 
-        {/* Seamless scrolling logos — no gaps, no breaks */}
+        {/* Seamless scrolling client logos */}
         <div className="overflow-hidden relative">
-          {/* Fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
@@ -517,27 +516,31 @@ const HomePage = () => {
             {[...Array(2)].map((_, repeat) => (
               <div key={repeat} className="flex items-center">
                 {[
-                  { name: 'AWS', logo: 'https://cdn.worldvectorlogo.com/logos/aws-2.svg' },
-                  { name: 'Google Cloud', logo: 'https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg' },
-                  { name: 'Microsoft', logo: 'https://cdn.worldvectorlogo.com/logos/microsoft-5.svg' },
-                  { name: 'Salesforce', logo: 'https://cdn.worldvectorlogo.com/logos/salesforce-2.svg' },
-                  { name: 'ServiceNow', logo: 'https://cdn.worldvectorlogo.com/logos/servicenow.svg' },
-                  { name: 'React', logo: 'https://cdn.worldvectorlogo.com/logos/react-2.svg' },
-                  { name: 'Figma', logo: 'https://cdn.worldvectorlogo.com/logos/figma-1.svg' },
-                  { name: 'Stripe', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg' },
+                  { name: 'Trello', logo: '/images/trello-logo.png' },
+                  { name: 'Superhuman', logo: '/images/superhuman-logo.png' },
+                  { name: 'Target', logo: '/images/target-logo.png' },
+                  { name: 'Synthesia', logo: '/images/synthesia-logo.png' },
+                  { name: 'Atlas Bar', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'Atlas Bar' },
+                  { name: 'Dead Rabbit', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'The Dead Rabbit' },
+                  { name: 'Moti Mahal', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'Moti Mahal' },
+                  { name: 'James Edition', logo: 'https://cdn.worldvectorlogo.com/logos/stripe-4.svg', text: 'James Edition' },
                 ].map((partner) => (
                   <div
                     key={partner.name + repeat}
-                    className="flex items-center justify-center opacity-30 hover:opacity-90 transition-opacity duration-300 flex-shrink-0"
+                    className="flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
                     style={{ width: '160px' }}
                   >
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="object-contain filter brightness-0 invert"
-                      style={{ height: '28px', width: '100px', objectFit: 'contain' }}
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
+                    {partner.text ? (
+                      <span className="text-white font-bold text-sm tracking-wider filter brightness-75 hover:brightness-100">{partner.text}</span>
+                    ) : (
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="object-contain filter brightness-0 invert"
+                        style={{ height: '32px', width: '110px', objectFit: 'contain' }}
+                        onError={(e) => { e.target.style.display = 'none'; }}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
