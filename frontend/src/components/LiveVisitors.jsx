@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const LiveVisitors = () => {
   const [count, setCount] = useState(null);
@@ -6,7 +6,7 @@ const LiveVisitors = () => {
   const wsRef = useRef(null);
   const retryRef = useRef(null);
 
-  const connect = () => {
+  const connect = useCallback(() => {
     const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
     const wsUrl = backendUrl.replace('https://', 'wss://').replace('http://', 'ws://');
 
@@ -31,7 +31,7 @@ const LiveVisitors = () => {
 
       ws.onerror = () => ws.close();
     } catch {}
-  };
+  }, []);
 
   useEffect(() => {
     connect();
