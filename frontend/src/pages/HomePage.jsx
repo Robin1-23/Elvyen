@@ -516,7 +516,7 @@ const HomePage = () => {
               align-items: center;
               justify-content: center;
               flex-shrink: 0;
-              margin: 0 48px;
+              margin: 0 56px;
               opacity: 1;
               transition: transform 0.3s ease, filter 0.3s ease;
             }
@@ -524,11 +524,17 @@ const HomePage = () => {
               transform: scale(1.1);
             }
             .marquee-logo img {
-              height: 60px;
+              height: 80px;
               width: auto;
-              max-width: 180px;
+              max-width: 220px;
               object-fit: contain;
               image-rendering: -webkit-optimize-contrast;
+            }
+            .marquee-logo img[alt="Landbook"],
+            .marquee-logo img[alt="Synthesia"] {
+              height: 80px;
+              width: auto;
+              max-width: 220px;
             }
           `}</style>
 
@@ -539,9 +545,9 @@ const HomePage = () => {
                   { name: 'Moti Mahal',    logo: '/images/motimahal-logo.png' },
                   { name: 'Atlas Bar',     logo: '/images/atlasbar-logo.png' },
                   { name: 'The Dead Rabbit', logo: '/images/deadrabbit-logo.png' },
-                  { name: 'Landbook',      logo: '/images/landbook-logo.png' },
+                  { name: 'Landbook',      logo: '/images/landbook-logo.png', style: { height: '80px', width: 'auto', maxWidth: '220px' } },
                   { name: 'James Edition', logo: '/images/jamesedition-logo.png' },
-                  { name: 'Synthesia',     logo: '/images/synthesia-logo.png' },
+                  { name: 'Synthesia',     logo: '/images/synthesia-logo.png', style: { height: '80px', width: 'auto', maxWidth: '220px' } },
                   { name: 'Target',        logo: '/images/target-logo.png' },
                   { name: 'Superhuman',    logo: '/images/superhuman-logo.png' },
                 ].map((partner) => (
@@ -549,6 +555,7 @@ const HomePage = () => {
                     <img
                       src={partner.logo}
                       alt={partner.name}
+                      style={partner.style || { height: '80px', width: 'auto', maxWidth: '220px', objectFit: 'contain' }}
                       onError={(e) => { e.target.style.display = 'none'; }}
                     />
                   </div>
