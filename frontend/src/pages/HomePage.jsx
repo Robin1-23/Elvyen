@@ -545,9 +545,9 @@ const HomePage = () => {
                   { name: 'Moti Mahal',    logo: '/images/motimahal-logo.png' },
                   { name: 'Atlas Bar',     logo: '/images/atlasbar-logo.png' },
                   { name: 'The Dead Rabbit', logo: '/images/deadrabbit-logo.png' },
-                  { name: 'Landbook',      logo: '/images/landbook-logo.png', style: { height: '80px', width: 'auto', maxWidth: '220px' } },
+                  { name: 'Landbook',      logo: '/images/landbook-logo.png', style: { height: '100px', width: 'auto', maxWidth: '220px' } },
                   { name: 'James Edition', logo: '/images/jamesedition-logo.png' },
-                  { name: 'Synthesia',     logo: '/images/synthesia-logo.png', style: { height: '80px', width: 'auto', maxWidth: '220px' } },
+                  { name: 'Synthesia',     logo: '/images/synthesia-logo.png', style: { height: '100px', width: 'auto', maxWidth: '220px' } },
                   { name: 'Target',        logo: '/images/target-logo.png' },
                   { name: 'Superhuman',    logo: '/images/superhuman-logo.png' },
                 ].map((partner) => (
